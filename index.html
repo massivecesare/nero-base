@@ -1,1211 +1,348 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>BUBBLEBEE | Luxury B&B</title>
-  <meta name="description" content="Bubblebee Luxury B&B: retreat di charme tra colline di grano, Maiella e Costa dei Trabocchi. Suite, Bubble Rooms ed esperienze autentiche in Abruzzo.">
+  <meta name="description" content="Bubblebee Luxury B&B: retreat di charme tra colline di grano, Maiella e Costa dei Trabocchi.">
   <style>
-    :root {
-      --bg: #0b0b0b;
-      --bg-alt: #141414;
-      --accent: #d4a94f;
-      --accent-soft: rgba(212,169,79,0.12);
-      --text: #f5f5f5;
-      --muted: #b3b3b3;
-      --border: #2a2a2a;
-      --radius: 18px;
-      --radius-pill: 999px;
-      --max-width: 1100px;
-      --shadow-soft: 0 18px 45px rgba(0,0,0,0.55);
-      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: var(--font-sans);
-      background: radial-gradient(circle at top, #1b1b1b 0, #050505 55%);
-      color: var(--text);
-      -webkit-font-smoothing: antialiased;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* Layout base */
-
-    .page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .shell {
-      width: 100%;
-      max-width: var(--max-width);
-      padding: 16px 18px 40px;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(18px);
-      background: linear-gradient(to bottom, rgba(5,5,5,0.96), rgba(5,5,5,0.75), transparent);
-    }
-
-    .header-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 10px 18px 8px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .brand-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 20%, #f7e3a8 0, #d4a94f 40%, #8a6424 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-      overflow: hidden;
-    }
-
-    .brand-logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-
-    .brand-text span:first-child {
-      font-size: 1.05rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .brand-text span:last-child {
-      font-size: 0.7rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .header-cta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .pill {
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(212,169,79,0.5);
-      padding: 7px 14px;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      background: linear-gradient(135deg, rgba(212,169,79,0.18), rgba(212,169,79,0.02));
-      color: var(--accent);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-    }
-
-    .pill-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #3ddc84;
-      box-shadow: 0 0 0 4px rgba(61,220,132,0.25);
-    }
-
-    .btn-primary {
-      border-radius: var(--radius-pill);
-      border: none;
-      padding: 9px 18px;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      background: linear-gradient(135deg, #f7e3a8, #d4a94f, #8a6424);
-      color: #1a1205;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 14px 30px rgba(0,0,0,0.7);
-    }
-
-    .btn-primary span.icon {
-      font-size: 1rem;
-    }
-
-    /* Hero */
-
-    .hero {
-      padding-top: 18px;
-      display: grid;
-      grid-template-columns: minmax(0,1.2fr);
-      gap: 22px;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(212,169,79,0.4);
-      padding: 6px 12px;
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--muted);
-      background: rgba(10,10,10,0.8);
-    }
-
-    .hero-badge-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-
-    .hero-title {
-      margin-top: 14px;
-      font-size: 2.1rem;
-      line-height: 1.1;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .hero-title span {
-      display: block;
-    }
-
-    .hero-title span.accent {
-      color: var(--accent);
-    }
-
-    .hero-subtitle {
-      margin-top: 12px;
-      font-size: 0.95rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .hero-meta {
-      margin-top: 16px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-
-    .hero-meta-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 10px;
-      border-radius: var(--radius-pill);
-      background: rgba(20,20,20,0.9);
-      border: 1px solid rgba(255,255,255,0.04);
-    }
-
-    .hero-meta-item span.icon {
-      font-size: 0.9rem;
-    }
-
-    .hero-actions {
-      margin-top: 18px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .btn-ghost {
-      border-radius: var(--radius-pill);
-      border: 1px solid var(--border);
-      padding: 9px 16px;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      background: rgba(10,10,10,0.9);
-      color: var(--muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .hero-note {
-      margin-top: 10px;
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-
-    .hero-media {
-      border-radius: 26px;
-      background: radial-gradient(circle at top, #2b2214 0, #050505 60%);
-      border: 1px solid rgba(212,169,79,0.35);
-      padding: 10px;
-      box-shadow: var(--shadow-soft);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-media-inner {
-      border-radius: 20px;
-      overflow: hidden;
-      position: relative;
-      aspect-ratio: 4/3;
-      background: url('https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1200') center/cover no-repeat;
-    }
-
-    .hero-tag {
-      position: absolute;
-      left: 14px;
-      top: 14px;
-      border-radius: var(--radius-pill);
-      padding: 6px 12px;
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      background: rgba(5,5,5,0.78);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: var(--muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .hero-tag span.dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-
-    .hero-badge-bottom {
-      position: absolute;
-      right: 14px;
-      bottom: 14px;
-      border-radius: 18px;
-      padding: 10px 12px;
-      background: rgba(5,5,5,0.85);
-      border: 1px solid rgba(255,255,255,0.12);
-      font-size: 0.75rem;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .hero-badge-bottom strong {
-      font-size: 0.8rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .hero-badge-bottom span {
-      color: var(--muted);
-    }
-
-    /* Sezioni generiche */
-
-    section {
-      margin-top: 34px;
-    }
-
-    .section-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .section-title {
-      font-size: 1.4rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-
-    .section-title span.accent {
-      color: var(--accent);
-    }
-
-    .section-intro {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 16px;
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: minmax(0,1fr);
-      gap: 14px;
-    }
-
-    .card {
-      border-radius: var(--radius);
-      background: radial-gradient(circle at top left, rgba(212,169,79,0.12) 0, rgba(10,10,10,0.95) 55%);
-      border: 1px solid rgba(255,255,255,0.06);
-      padding: 14px 14px 16px;
-      box-shadow: 0 14px 35px rgba(0,0,0,0.7);
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .card-title {
-      font-size: 1rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .card-tag {
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .card-sub {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-
-    .card-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .chip {
-      border-radius: var(--radius-pill);
-      padding: 5px 10px;
-      font-size: 0.7rem;
-      background: rgba(10,10,10,0.9);
-      border: 1px solid rgba(255,255,255,0.06);
-      color: var(--muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .chip span.icon {
-      font-size: 0.9rem;
-    }
-
-    .card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 6px;
-      gap: 10px;
-    }
-
-    .price {
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    .price strong {
-      font-size: 1rem;
-      color: var(--accent);
-    }
-
-    .btn-outline {
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(212,169,79,0.7);
-      padding: 7px 14px;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      background: transparent;
-      color: var(--accent);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-    }
-
-    /* Territorio */
-
-    .territory-grid {
-      display: grid;
-      grid-template-columns: minmax(0,1fr);
-      gap: 10px;
-    }
-
-    .territory-item {
-      border-radius: 14px;
-      padding: 10px 12px;
-      background: rgba(10,10,10,0.9);
-      border: 1px solid rgba(255,255,255,0.06);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .territory-item-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .territory-name {
-      font-size: 0.9rem;
-    }
-
-    .territory-tag {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--muted);
-    }
-
-    .territory-distance {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-
-    /* Esperienze */
-
-    .experience-card {
-      border-radius: var(--radius);
-      padding: 14px 14px 16px;
-      background: radial-gradient(circle at top, rgba(212,169,79,0.16) 0, rgba(10,10,10,0.96) 55%);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.75);
-    }
-
-    .experience-meta {
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-
-    .experience-title {
-      font-size: 1rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .experience-text {
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 10px;
-    }
-
-    /* Sala eventi */
-
-    .event-room {
-      border-radius: var(--radius);
-      padding: 16px 14px 18px;
-      background: radial-gradient(circle at top left, rgba(212,169,79,0.18) 0, rgba(10,10,10,0.96) 55%);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 18px 45px rgba(0,0,0,0.8);
-    }
-
-    .event-room-title {
-      font-size: 1.1rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .event-room-sub {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-
-    .event-room-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    /* Recensioni */
-
-    .reviews {
-      border-radius: var(--radius);
-      padding: 14px 14px 16px;
-      background: rgba(10,10,10,0.95);
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .review-item {
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 10px;
-    }
-
-    .review-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .review-author {
-      margin-top: 4px;
-      font-size: 0.8rem;
-      color: var(--accent);
-    }
-
-    /* Contatti & footer */
-
-    .contact {
-      border-radius: var(--radius);
-      padding: 16px 14px 18px;
-      background: rgba(10,10,10,0.96);
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .contact-row {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: 10px;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    .contact-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--muted);
-    }
-
-    footer {
-      margin-top: 26px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      font-size: 0.75rem;
-      color: var(--muted);
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    footer .footer-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-    }
-
-    footer .footer-brand {
-      font-size: 0.8rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    footer .footer-links {
-      display: flex;
-      gap: 10px;
-      font-size: 0.75rem;
-    }
-
-    @media (min-width: 720px) {
-      .hero {
-        grid-template-columns: minmax(0,1.1fr) minmax(0,1fr);
-        align-items: center;
-      }
-
-      .cards-grid {
-        grid-template-columns: repeat(2, minmax(0,1fr));
-      }
-
-      .territory-grid {
-        grid-template-columns: repeat(2, minmax(0,1fr));
-      }
-    }
-
-    @media (min-width: 980px) {
-      .hero-title {
-        font-size: 2.6rem;
-      }
+    :root{
+      --bg:#050505; --text:#f5f5f5; --muted:#b3b3b3; --accent:#d4a94f;
+      --radius:16px; --pill:999px; --maxw:1100px; --shadow:0 18px 45px rgba(0,0,0,0.55);
+      --font:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:var(--font);
+      background:linear-gradient(180deg,#0b0b0b 0,#050505 100%);
+      color:var(--text); -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    a{color:inherit;text-decoration:none}
+    .shell{max-width:var(--maxw);margin:0 auto;padding:14px}
+    header{
+      position:sticky;top:0;z-index:40;
+      background:rgba(5,5,5,0.6);backdrop-filter:blur(8px);
+      border-bottom:1px solid rgba(255,255,255,0.03);
+    }
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px}
+    /* BRAND: logo fully visible on mobile */
+    .brand{
+      display:flex;align-items:center;gap:10px;
+    }
+    .brand-logo{
+      display:flex;align-items:center;justify-content:center;
+      background:transparent;border-radius:10px;padding:2px;
+      /* allow logo to scale naturally */
+      width:auto; height:48px; min-width:48px;
+    }
+    .brand-logo img{
+      display:block; max-height:48px; width:auto; object-fit:contain;
+      /* ensure full logo visible even if wide */
+      max-width:160px;
+    }
+    .brand-text{display:none} /* keep header minimal on small screens */
+    /* NAV */
+    .nav-toggle{display:flex;align-items:center;gap:8px}
+    .hamburger{
+      width:44px;height:44px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);
+      background:rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center;
+      cursor:pointer;font-size:18px;color:var(--muted)
+    }
+    .cta-row{display:flex;align-items:center;gap:8px}
+    .btn-primary{
+      background:linear-gradient(135deg,#f7e3a8,#d4a94f);color:#1a1205;border:none;padding:8px 14px;border-radius:999px;font-weight:600;
+      box-shadow:var(--shadow);cursor:pointer;font-size:0.85rem;
+    }
+    /* Mobile nav panel */
+    .nav-panel{
+      position:fixed;inset:0;top:64px;left:0;right:0;bottom:0;
+      background:linear-gradient(180deg,rgba(2,2,2,0.96),rgba(2,2,2,0.98));
+      transform:translateY(-6%);opacity:0;pointer-events:none;transition:all .28s ease;
+      padding:20px;display:flex;flex-direction:column;gap:14px;
+    }
+    .nav-panel.open{transform:none;opacity:1;pointer-events:auto}
+    .nav-panel a{padding:12px;border-radius:12px;background:rgba(255,255,255,0.02);display:block;color:var(--text);font-weight:600}
+    /* HERO + carousel */
+    .hero{display:grid;grid-template-columns:1fr;padding:18px 0;gap:18px;align-items:start}
+    .hero-left{padding-right:6px}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);font-size:0.78rem;color:var(--muted)}
+    .hero-title{font-size:1.9rem;line-height:1.05;margin-top:10px;text-transform:uppercase}
+    .hero-title .accent{color:var(--accent)}
+    .hero-sub{color:var(--muted);margin-top:10px;font-size:0.95rem;line-height:1.6}
+    .hero-actions{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+    /* Carousel base */
+    .carousel{position:relative;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,0.06);box-shadow:var(--shadow);height:56vw;max-height:420px;background:#111}
+    .carousel .slide{position:absolute;inset:0;background-size:cover;background-position:center;transition:opacity .6s ease,transform .6s ease;opacity:0;transform:scale(1.02)}
+    .carousel .slide.active{opacity:1;transform:scale(1)}
+    .carousel .overlay{position:absolute;left:14px;top:14px;padding:8px 12px;border-radius:999px;background:rgba(0,0,0,0.45);color:var(--muted);font-size:0.8rem}
+    .carousel .controls{position:absolute;left:0;right:0;bottom:12px;display:flex;justify-content:center;gap:8px}
+    .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.25);border:1px solid rgba(0,0,0,0.2)}
+    .dot.active{background:var(--accent);box-shadow:0 6px 18px rgba(212,169,79,0.18)}
+    .carousel .nav-btn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:10px;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;color:var(--text);border:1px solid rgba(255,255,255,0.04);cursor:pointer}
+    .carousel .nav-btn.left{left:10px}
+    .carousel .nav-btn.right{right:10px}
+    /* Sections */
+    section{margin-top:28px}
+    .section-label{font-size:0.72rem;letter-spacing:0.16em;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
+    .section-title{font-size:1.3rem;text-transform:uppercase;margin-bottom:8px}
+    .cards-grid{display:grid;grid-template-columns:1fr;gap:12px}
+    .card{border-radius:14px;padding:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)}
+    .card img{width:100%;height:160px;object-fit:cover;border-radius:10px;margin-bottom:10px}
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .chip{background:rgba(255,255,255,0.02);padding:6px 10px;border-radius:999px;font-size:0.78rem;color:var(--muted)}
+    /* Footer */
+    footer{margin-top:26px;padding:18px 0;border-top:1px solid rgba(255,255,255,0.03);font-size:0.82rem;color:var(--muted)}
+    /* Desktop tweaks */
+    @media(min-width:720px){
+      .brand-text{display:flex;flex-direction:column;line-height:1}
+      .brand-logo img{max-height:56px}
+      .hero{grid-template-columns:1fr 1fr;gap:22px}
+      .carousel{height:320px}
+      .cards-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(min-width:980px){
+      .shell{padding:28px}
+      .hero-title{font-size:2.6rem}
+      .carousel{height:420px}
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <header>
-      <div class="header-inner">
-        <div class="brand">
-          <div class="brand-logo">
-            <!-- Sostituisci src con il tuo logo -->
-            <!-- <img src="logo-bubblebee.png" alt="Bubblebee Luxury B&B"> -->
-          </div>
-          <div class="brand-text">
-            <span>Bubblebee</span>
-            <span>Luxury B&B</span>
-          </div>
+  <header>
+    <div class="header-inner shell">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="false">
+          <!-- Sostituisci "logo-bubblebee.png" con il nome del file del tuo logo caricato nel repo -->
+          <img src="logo-bubblebee.png" alt="Bubblebee Luxury B&B logo" id="site-logo">
         </div>
-        <div class="header-cta">
-          <div class="pill">
-            <span class="pill-dot"></span>
-            Prenota il tuo retreat
-          </div>
-          <button class="btn-primary" onclick="document.getElementById('contatti').scrollIntoView({behavior:'smooth'})">
-            <span class="icon">✦</span>
-            <span>Prenota ora</span>
-          </button>
+        <div class="brand-text" aria-hidden="true">
+          <span style="font-weight:700;letter-spacing:0.12em">Bubblebee</span>
+          <span style="font-size:0.78rem;color:var(--muted);letter-spacing:0.18em">Luxury B&amp;B</span>
         </div>
       </div>
-    </header>
 
-    <main class="shell">
-      <!-- HERO -->
-      <section class="hero" id="top">
-        <div>
-          <div class="hero-badge">
-            <span class="hero-badge-dot"></span>
-            Luxury Retreat &amp; Nature · Abruzzo
-          </div>
-          <h1 class="hero-title">
-            <span>Un rifugio di</span>
-            <span class="accent">lusso silenzioso</span>
-            <span>tra colline e stelle.</span>
-          </h1>
-          <p class="hero-subtitle">
-            Bubblebee è un luxury B&amp;B immerso tra i campi di grano, con vista sulla Maiella e a pochi minuti dalla Costa dei Trabocchi. Suite di design, Bubble Rooms sotto il cielo d’Abruzzo ed esperienze autentiche pensate per chi cerca tempo, spazio e bellezza.
-          </p>
-          <div class="hero-meta">
-            <div class="hero-meta-item">
-              <span class="icon">☾</span>
-              Bubble Rooms sotto le stelle
-            </div>
-            <div class="hero-meta-item">
-              <span class="icon">✦</span>
-              Suite con vista Maiella
-            </div>
-            <div class="hero-meta-item">
-              <span class="icon">⛰</span>
-              A 30 minuti dalla meraviglia
-            </div>
-          </div>
-          <div class="hero-actions">
-            <button class="btn-primary" onclick="document.getElementById('suite').scrollIntoView({behavior:'smooth'})">
-              <span class="icon">➝</span>
-              <span>Scopri le suite</span>
-            </button>
-            <button class="btn-ghost" onclick="document.getElementById('territorio').scrollIntoView({behavior:'smooth'})">
-              <span>Vivi l’Abruzzo autentico</span>
-            </button>
-          </div>
-          <p class="hero-note">
-            Prenotazioni esclusive, poche camere, massima privacy. Ogni dettaglio è curato personalmente.
-          </p>
+      <div class="nav-toggle">
+        <div class="cta-row">
+          <button class="btn-primary" onclick="scrollToSection('contatti')">Prenota</button>
         </div>
-        <div class="hero-media">
-          <div class="hero-media-inner">
-            <div class="hero-tag">
-              <span class="dot"></span>
-              Tenuta Bubblebee · Sant’Eusanio
-            </div>
-            <div class="hero-badge-bottom">
-              <strong>Vista Maiella &amp; colline</strong>
-              <span>Alba dorata sui campi di grano, tramonti che sfumano verso il mare Adriatico.</span>
-            </div>
+        <button class="hamburger" id="hamburger" aria-label="Apri menu">☰</button>
+      </div>
+    </div>
+
+    <nav class="nav-panel" id="navPanel" aria-hidden="true">
+      <a href="#suite" onclick="toggleNav()">Suite</a>
+      <a href="#bubble" onclick="toggleNav()">Bubble Rooms</a>
+      <a href="#esperienze" onclick="toggleNav()">Esperienze</a>
+      <a href="#bottega" onclick="toggleNav()">Bottega</a>
+      <a href="#territorio" onclick="toggleNav()">Territorio</a>
+      <a href="#sala-eventi" onclick="toggleNav()">Sala Eventi</a>
+      <a href="#contatti" onclick="toggleNav()">Contatti</a>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <!-- HERO con carousel -->
+    <section class="hero" id="top">
+      <div class="hero-left">
+        <div class="hero-badge">Luxury Retreat · Abruzzo</div>
+        <h1 class="hero-title"><span>Un rifugio di</span><br><span class="accent">lusso silenzioso</span><br>tra colline e stelle</h1>
+        <p class="hero-sub">Suite di design, Bubble Rooms sotto il cielo d’Abruzzo ed esperienze autentiche pensate per chi cerca tempo, spazio e bellezza.</p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="scrollToSection('suite')">Scopri le suite</button>
+          <button class="btn-primary" style="background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)" onclick="scrollToSection('territorio')">Vivi l'Abruzzo</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="carousel" id="heroCarousel" aria-roledescription="carousel">
+          <!-- Slide: sostituisci gli URL con le tue immagini ad alta qualità -->
+          <div class="slide active" style="background-image:url('https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1600');" role="group" aria-label="Slide 1"></div>
+          <div class="slide" style="background-image:url('https://images.pexels.com/photos/21014/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1600');" role="group" aria-label="Slide 2"></div>
+          <div class="slide" style="background-image:url('https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg?auto=compress&cs=tinysrgb&w=1600');" role="group" aria-label="Slide 3"></div>
+
+          <div class="overlay">Tenuta Bubblebee · Sant’Eusanio</div>
+
+          <button class="nav-btn left" aria-label="Previous" onclick="heroPrev()">‹</button>
+          <button class="nav-btn right" aria-label="Next" onclick="heroNext()">›</button>
+
+          <div class="controls" id="heroDots" aria-hidden="false">
+            <div class="dot active" data-index="0" onclick="heroGo(0)"></div>
+            <div class="dot" data-index="1" onclick="heroGo(1)"></div>
+            <div class="dot" data-index="2" onclick="heroGo(2)"></div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- SUITE -->
-      <section id="suite">
-        <div class="section-label">Le nostre camere</div>
-        <h2 class="section-title">Suite <span class="accent">di carattere</span></h2>
-        <p class="section-intro">
-          Quattro suite ispirate agli elementi e al paesaggio che circonda Bubblebee. Ogni camera è diversa, ma tutte condividono la stessa idea: farti sentire a casa, con il comfort di un boutique hotel e il silenzio di una tenuta privata.
-        </p>
-        <div class="cards-grid">
-          <article class="card">
-            <div class="card-header">
-              <div>
-                <div class="card-title">Suite Aurea</div>
-                <div class="card-tag">Luce, grano, orizzonti</div>
-              </div>
-            </div>
-            <p class="card-sub">
-              Ampia suite matrimoniale con grandi vetrate sui campi di grano, toni caldi e dettagli in ottone. Perfetta per chi ama svegliarsi con il sole che entra in camera.
-            </p>
-            <div class="card-meta">
-              <div class="chip"><span class="icon">☀</span>Vista colline di grano</div>
-              <div class="chip"><span class="icon">🛁</span>Bagno en-suite</div>
-              <div class="chip"><span class="icon">✦</span>Letto king-size</div>
-            </div>
-            <div class="card-footer">
-              <div class="price">
-                da <strong>€190</strong> / notte
-              </div>
-              <button class="btn-outline" onclick="document.getElementById('contatti').scrollIntoView({behavior:'smooth'})">
-                Verifica disponibilità
-              </button>
-            </div>
-          </article>
+    <!-- Esempio di sezione con immagini/slide interne -->
+    <section id="suite">
+      <div class="section-label">Le nostre camere</div>
+      <h2 class="section-title">Suite <span class="accent">di carattere</span></h2>
+      <p class="section-intro" style="color:var(--muted);margin-bottom:12px">Quattro suite ispirate agli elementi e al paesaggio che circonda Bubblebee.</p>
 
-          <article class="card">
-            <div class="card-header">
-              <div>
-                <div class="card-title">Suite Terra</div>
-                <div class="card-tag">Calore, materia, radici</div>
-              </div>
-            </div>
-            <p class="card-sub">
-              Pavimenti in legno, tessuti naturali, colori profondi. Una suite che abbraccia, pensata per chi cerca un rifugio intimo dopo una giornata tra borghi, vigneti e trabocchi.
-            </p>
-            <div class="card-meta">
-              <div class="chip"><span class="icon">⛰</span>Vista Maiella</div>
-              <div class="chip"><span class="icon">🔥</span>Angolo lettura</div>
-              <div class="chip"><span class="icon">☕</span>Courtesy bar</div>
-            </div>
-            <div class="card-footer">
-              <div class="price">
-                da <strong>€180</strong> / notte
-              </div>
-              <button class="btn-outline" onclick="document.getElementById('contatti').scrollIntoView({behavior:'smooth'})">
-                Verifica disponibilità
-              </button>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-header">
-              <div>
-                <div class="card-title">Suite Aqua</div>
-                <div class="card-tag">Relax, fluidità, silenzio</div>
-              </div>
-            </div>
-            <p class="card-sub">
-              Linee morbide, colori desaturati, bagno ampio. Un invito a rallentare, tra docce lunghe, tisane serali e il suono lontano della campagna.
-            </p>
-            <div class="card-meta">
-              <div class="chip"><span class="icon">🛁</span>Bagno spazioso</div>
-              <div class="chip"><span class="icon">🌙</span>Zona notte ovattata</div>
-              <div class="chip"><span class="icon">✧</span>Dettagli artigianali</div>
-            </div>
-            <div class="card-footer">
-              <div class="price">
-                da <strong>€175</strong> / notte
-              </div>
-              <button class="btn-outline" onclick="document.getElementById('contatti').scrollIntoView({behavior:'smooth'})">
-                Verifica disponibilità
-              </button>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-header">
-              <div>
-                <div class="card-title">Suite Ignis</div>
-                <div class="card-tag">Fuoco, intimità, notte</div>
-              </div>
-            </div>
-            <p class="card-sub">
-              Atmosfera raccolta, luci basse, toni scuri. La suite perfetta per una fuga romantica, tra calici di vino, playlist soffuse e cielo stellato fuori dalla finestra.
-            </p>
-            <div class="card-meta">
-              <div class="chip"><span class="icon">🔥</span>Atmosfera intima</div>
-              <div class="chip"><span class="icon">🍷</span>Selezione vini locali</div>
-              <div class="chip"><span class="icon">☾</span>Vista notturna</div>
-            </div>
-            <div class="card-footer">
-              <div class="price">
-                da <strong>€195</strong> / notte
-              </div>
-              <button class="btn-outline" onclick="document.getElementById('contatti').scrollIntoView({behavior:'smooth'})">
-                Verifica disponibilità
-              </button>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- BUBBLE ROOMS -->
-      <section id="bubble">
-        <div class="section-label">Dormire sotto le stelle</div>
-        <h2 class="section-title">Bubble <span class="accent">Rooms</span></h2>
-        <p class="section-intro">
-          Due bolle trasparenti immerse nel verde, per addormentarsi guardando il cielo d’Abruzzo. Comfort da suite, ma con la magia di una notte all’aperto, protetti e coccolati.
-        </p>
-        <div class="cards-grid">
-          <article class="card">
-            <div class="card-header">
-              <div>
-                <div class="card-title">Bubble Vega</div>
-                <div class="card-tag">Sotto il cielo d’estate</div>
-              </div>
-            </div>
-            <p class="card-sub">
-              Posizionata in un punto panoramico della tenuta, Vega è la bolla perfetta per chi ama le notti limpide, le costellazioni e il silenzio assoluto.
-            </p>
-            <div class="card-meta">
-              <div class="chip"><span class="icon">☾</span>Cielo stellato</div>
-              <div class="chip"><span class="icon">🛏</span>Letto queen-size</div>
-              <div class="chip"><span class="icon">❄</span>Climatizzazione</div>
-            </div>
-            <div class="card-footer">
-              <div class="price">
-                da <strong>€220</strong> / notte
-              </div>
-              <button class="btn-outline" onclick="document.getElementById('contatti').scrollIntoView({behavior:'smooth'})">
-                Richiedi una notte in bolla
-              </button>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-header">
-              <div>
-                <div class="card-title">Bubble Sirius</div>
-                <div class="card-tag">Luna piena &amp; orizzonti</div>
-              </div>
-            </div>
-            <p class="card-sub">
-              Una bolla con vista ampia sulle colline e sulla linea lontana del mare. Ideale nelle notti di luna piena, quando il paesaggio si accende di riflessi argentati.
-            </p>
-            <div class="card-meta">
-              <div class="chip"><span class="icon">🌕</span>Vista luna piena</div>
-              <div class="chip"><span class="icon">🛁</span>Bagno privato adiacente</div>
-              <div class="chip"><span class="icon">✦</span>Colazione in camera</div>
-            </div>
-            <div class="card-footer">
-              <div class="price">
-                da <strong>€230</strong> / notte
-              </div>
-              <button class="btn-outline" onclick="document.getElementById('contatti').scrollIntoView({behavior:'smooth'})">
-                Richiedi una notte in bolla
-              </button>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- ESPERIENZE -->
-      <section id="esperienze">
-        <div class="section-label">Esperienze</div>
-        <h2 class="section-title">Vivere <span class="accent">Bubblebee</span></h2>
-        <p class="section-intro">
-          Non solo soggiorno: Bubblebee è un modo di vivere l’Abruzzo. Rituali lenti, gesti antichi, momenti pensati per farti sentire parte di questa terra.
-        </p>
-        <div class="cards-grid">
-          <article class="experience-card">
-            <div class="experience-meta">Ottobre · Novembre</div>
-            <div class="experience-title">Raccolta delle olive</div>
-            <p class="experience-text">
-              Una giornata tra gli ulivi, con cestini, reti e mani che si sporcano di verde. Si parte al mattino, si raccoglie insieme, si assaggia l’olio nuovo al frantoio e si rientra al tramonto, stanchi e felici.
-            </p>
-            <div class="card-meta">
-              <div class="chip"><span class="icon">🌿</span>Ulivi secolari</div>
-              <div class="chip"><span class="icon">🥖</span>Degustazione olio nuovo</div>
-              <div class="chip"><span class="icon">📸</span>Momenti da ricordare</div>
-            </div>
-          </article>
-
-          <article class="experience-card">
-            <div class="experience-meta">Primavera · Estate</div>
-            <div class="experience-title">Yoga al tramonto</div>
-            <p class="experience-text">
-              Una pratica dolce tra i campi, mentre il cielo cambia colore e l’aria si fa più fresca. Perfetta per chi vuole chiudere la giornata in ascolto, respirando lentamente.
-            </p>
-            <div class="card-meta">
-              <div class="chip"><span class="icon">☀</span>Golden hour</div>
-              <div class="chip"><span class="icon">🧘‍♀️</span>Insegnante dedicata</div>
-              <div class="chip"><span class="icon">🍵</span>Tisana finale</div>
-            </div>
-          </article>
-
-          <article class="experience-card">
-            <div class="experience-meta">Luglio · Agosto</div>
-            <div class="experience-title">Festa del grano</div>
-            <p class="experience-text">
-              Una serata tra lucine, tavoli lunghi e piatti della tradizione. Il grano appena raccolto, il vino locale, la musica che accompagna fino a tardi. Un piccolo rito d’estate.
-            </p>
-            <div class="card-meta">
-              <div class="chip"><span class="icon">🌾</span>Campi di grano</div>
-              <div class="chip"><span class="icon">🍷</span>Vini d’Abruzzo</div>
-              <div class="chip"><span class="icon">♪</span>Musica dal vivo</div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- BOTTEGA -->
-      <section id="bottega">
-        <div class="section-label">La bottega</div>
-        <h2 class="section-title">Sapori <span class="accent">di casa</span></h2>
-        <p class="section-intro">
-          Una piccola selezione di prodotti che raccontano Bubblebee e l’Abruzzo: olio, vino, miele e box degustazione curati personalmente.
-        </p>
-        <div class="cards-grid">
-          <article class="card">
-            <div class="card-header">
-              <div>
-                <div class="card-title">Olio EVO Bubblebee</div>
-                <div class="card-tag">Monocultivar · Raccolta a mano</div>
-              </div>
-            </div>
-            <p class="card-sub">
-              Un olio extravergine dal profilo elegante, perfetto per esaltare piatti semplici e materici. Disponibile in bottiglia o in box degustazione.
-            </p>
-            <div class="card-meta">
-              <div class="chip"><span class="icon">🌿</span>Ulivi di famiglia</div>
-              <div class="chip"><span class="icon">🥖</span>Ideale a crudo</div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-header">
-              <div>
-                <div class="card-title">Vini selezionati</div>
-                <div class="card-tag">Cantine del territorio</div>
-              </div>
-            </div>
-            <p class="card-sub">
-              Una piccola carta di Montepulciano, Pecorino e Cerasuolo scelti tra le cantine che amiamo di più, da gustare in camera o al tramonto.
-            </p>
-            <div class="card-meta">
-              <div class="chip"><span class="icon">🍷</span>Montepulciano d’Abruzzo</div>
-              <div class="chip"><span class="icon">🥂</span>Pecorino</div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-header">
-              <div>
-                <div class="card-title">Miele &amp; dolci</div>
-                <div class="card-tag">Colazioni lente</div>
-              </div>
-            </div>
-            <p class="card-sub">
-              Mieli locali, confetture e piccoli dolci artigianali che ritroverai a colazione e che puoi portare a casa come ricordo.
-            </p>
-            <div class="card-meta">
-              <div class="chip"><span class="icon">🍯</span>Miele locale</div>
-              <div class="chip"><span class="icon">🍑</span>Confetture</div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- TERRITORIO -->
-      <section id="territorio">
-        <div class="section-label">Il territorio</div>
-        <h2 class="section-title">A 30 minuti <span class="accent">dalla meraviglia</span></h2>
-        <p class="section-intro">
-          Da Bubblebee puoi raggiungere in poco tempo mare, montagna, borghi e riserve naturali. Qui alcune delle nostre mete preferite, tutte entro circa 30 minuti di auto.
-        </p>
-        <div class="territory-grid">
-          <div class="territory-item">
-            <div class="territory-item-header">
-              <div>
-                <div class="territory-name">Costa dei Trabocchi</div>
-                <div class="territory-distance">circa 25 minuti</div>
-              </div>
-              <div class="territory-tag">Mare</div>
-            </div>
-            <div class="territory-distance">
-              Antichi trabocchi sul mare Adriatico, passerelle in legno e ristoranti sospesi sull’acqua.
-            </div>
+      <div class="cards-grid">
+        <article class="card">
+          <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Suite Aurea">
+          <div style="font-weight:700">Suite Aurea</div>
+          <div style="color:var(--muted);margin-top:6px">Ampia suite matrimoniale con grandi vetrate sui campi di grano.</div>
+          <div class="chips">
+            <div class="chip">Vista colline</div><div class="chip">Letto king</div>
           </div>
+        </article>
 
-          <div class="territory-item">
-            <div class="territory-item-header">
-              <div>
-                <div class="territory-name">Castello di Roccascalegna</div>
-                <div class="territory-distance">circa 20 minuti</div>
-              </div>
-              <div class="territory-tag">Borgo</div>
-            </div>
-            <div class="territory-distance">
-              Un castello arroccato sulla roccia, con vista spettacolare sulla valle e sulla Maiella.
-            </div>
+        <article class="card">
+          <img src="https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Suite Terra">
+          <div style="font-weight:700">Suite Terra</div>
+          <div style="color:var(--muted);margin-top:6px">Tessuti naturali e atmosfera raccolta.</div>
+          <div class="chips">
+            <div class="chip">Vista Maiella</div><div class="chip">Courtesy bar</div>
           </div>
+        </article>
+      </div>
+    </section>
 
-          <div class="territory-item">
-            <div class="territory-item-header">
-              <div>
-                <div class="territory-name">Oasi WWF Lago di Serranella</div>
-                <div class="territory-distance">circa 15 minuti</div>
-              </div>
-              <div class="territory-tag">Natura</div>
-            </div>
-            <div class="territory-distance">
-              Un’oasi naturale tra acqua e canneti, perfetta per passeggiate lente e birdwatching.
-            </div>
-          </div>
+    <!-- Bubble Rooms -->
+    <section id="bubble">
+      <div class="section-label">Dormire sotto le stelle</div>
+      <h2 class="section-title">Bubble <span class="accent">Rooms</span></h2>
+      <div class="cards-grid">
+        <article class="card">
+          <img src="https://images.pexels.com/photos/355948/pexels-photo-355948.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Bubble Vega">
+          <div style="font-weight:700">Bubble Vega</div>
+          <div style="color:var(--muted);margin-top:6px">Bolla panoramica per notti stellate.</div>
+        </article>
+        <article class="card">
+          <img src="https://images.pexels.com/photos/3225517/pexels-photo-3225517.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Bubble Sirius">
+          <div style="font-weight:700">Bubble Sirius</div>
+          <div style="color:var(--muted);margin-top:6px">Posizione ampia con vista mare-lontano.</div>
+        </article>
+      </div>
+    </section>
 
-          <div class="territory-item">
-            <div class="territory-item-header">
-              <div>
-                <div class="territory-name">Gole di San Martino</div>
-                <div class="territory-distance">circa 30 minuti</div>
-              </div>
-              <div class="territory-tag">Montagna</div>
-            </div>
-            <div class="territory-distance">
-              Un canyon naturale alle porte della Maiella, con sentieri che si insinuano tra le rocce.
-            </div>
-          </div>
+    <!-- Esperienze -->
+    <section id="esperienze">
+      <div class="section-label">Esperienze</div>
+      <h2 class="section-title">Vivere <span class="accent">Bubblebee</span></h2>
+      <div class="cards-grid">
+        <article class="card">
+          <img src="https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Raccolta olive">
+          <div style="font-weight:700">Raccolta delle olive</div>
+          <div style="color:var(--muted);margin-top:6px">Giornata tra gli ulivi e degustazione dell'olio nuovo.</div>
+        </article>
+        <article class="card">
+          <img src="https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Yoga al tramonto">
+          <div style="font-weight:700">Yoga al tramonto</div>
+          <div style="color:var(--muted);margin-top:6px">Pratica dolce tra i campi alla golden hour.</div>
+        </article>
+      </div>
+    </section>
 
-          <div class="territory-item">
-            <div class="territory-item-header">
-              <div>
-                <div class="territory-name">Lanciano</div>
-                <div class="territory-distance">circa 20 minuti</div>
-              </div>
-              <div class="territory-tag">Città</div>
-            </div>
-            <div class="territory-distance">
-              Una città viva tutto l’anno, tra portici, piazze e locali dove fermarsi per un aperitivo.
-            </div>
-          </div>
+    <!-- Territorio -->
+    <section id="territorio">
+      <div class="section-label">Il territorio</div>
+      <h2 class="section-title">A 30 minuti <span class="accent">dalla meraviglia</span></h2>
+      <div class="cards-grid">
+        <article class="card">
+          <img src="https://images.pexels.com/photos/21014/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1200" alt="Costa dei Trabocchi">
+          <div style="font-weight:700">Costa dei Trabocchi</div>
+          <div style="color:var(--muted);margin-top:6px">Antichi trabocchi e ristoranti sul mare.</div>
+        </article>
+        <article class="card">
+          <img src="https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Gole di San Martino">
+          <div style="font-weight:700">Gole di San Martino</div>
+          <div style="color:var(--muted);margin-top:6px">Sentieri e canyon alle porte della Maiella.</div>
+        </article>
+      </div>
+    </section>
 
-          <div class="territory-item">
-            <div class="territory-item-header">
-              <div>
-                <div class="territory-name">Cala Turchino</div>
-                <div class="territory-distance">circa 30 minuti</div>
-              </div>
-              <div class="territory-tag">Mare</div>
-            </div>
-            <div class="territory-distance">
-              Una delle calette più suggestive della Costa dei Trabocchi, acqua turchese e ciottoli bianchi.
-            </div>
-          </div>
-        </div>
-      </section>
+    <!-- Contatti -->
+    <section id="contatti">
+      <div class="section-label">Contatti</div>
+      <h2 class="section-title">Scrivici per <span class="accent">prenotare</span></h2>
+      <div class="card">
+        <div style="color:var(--muted);margin-bottom:8px">Email: info@bubblebee.it · Tel/WhatsApp: +39 000 000 0000</div>
+        <div style="color:var(--muted)">Indirizzo: Tenuta Bubblebee · Sant’Eusanio del Sangro (CH)</div>
+      </div>
+    </section>
 
-      <!-- SALA EVENTI -->
-      <section id="sala-eventi">
-        <div class="section-label">Eventi</div>
-        <h2 class="section-title">Sala <span class="accent">Orizzonti</span></h2>
-        <p class="section-intro">
-          Una sala luminosa affacciata sulle colline, pensata per piccoli matrimoni, retreat aziendali, shooting e incontri che hanno bisogno di spazio e silenzio.
-        </p>
-        <div class="event-room">
-          <div class="event-room-title">Sala Orizzonti</div>
-          <div class="event-room-sub">
-            Fino a circa 40 persone sedute, luce naturale, vista sui campi e sulla Maiella. Possibilità di catering selezionato, allestimenti su misura e utilizzo esclusivo della tenuta.
-          </div>
-          <div class="event-room-meta">
-            <div class="chip"><span class="icon">☀</span>Luce naturale</div>
-            <div class="chip"><span class="icon">🖥</span>Schermo &amp; audio</div>
-            <div class="chip"><span class="icon">🍽</span>Catering su richiesta</div>
-            <div class="chip"><span class="icon">✦</span>Uso esclusivo</div>
-          </div>
-          <button class="btn-outline" onclick="document.getElementById('contatti').scrollIntoView({behavior:'smooth'})">
-            Richiedi un evento su misura
-          </button>
-        </div>
-      </section>
-
-      <!-- RECENSIONI -->
-      <section id="recensioni">
-        <div class="section-label">Dicono di noi</div>
-        <h2 class="section-title">Piccole <span class="accent">tracce</span> lasciate dagli ospiti</h2>
-        <div class="reviews">
-          <div class="review-item">
-            “Un luogo che sembra sospeso nel tempo. Ci siamo svegliati con la luce dorata sui campi e siamo andati a dormire guardando le stelle dalla bolla. Torneremo.”
-            <div class="review-author">— Marta &amp; Luca</div>
-          </div>
-          <div class="review-item">
-            “Ogni dettaglio è pensato, ma mai ostentato. È lusso vero: quello che ti fa respirare, non quello che ti mette in soggezione.”
-            <div class="review-author">— Francesca</div>
-          </div>
-          <div class="review-item">
-            “Perfetto per un retreat di lavoro diverso dal solito: abbiamo lavorato, camminato, mangiato benissimo e siamo tornati con idee nuove.”
-            <div class="review-author">— Team creativo</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CONTATTI -->
-      <section id="contatti">
-        <div class="section-label">Contatti</div>
-        <h2 class="section-title">Scrivici per <span class="accent">prenotare</span></h2>
-        <div class="contact">
-          <div class="contact-row">
-            <div class="contact-label">Email</div>
-            <div>info@bubblebee.it</div>
-          </div>
-          <div class="contact-row">
-            <div class="contact-label">Telefono / WhatsApp</div>
-            <div>+39 000 000 0000</div>
-          </div>
-          <div class="contact-row">
-            <div class="contact-label">Indirizzo</div>
-            <div>Bubblebee Luxury B&amp;B · Sant’Eusanio del Sangro (CH) · Abruzzo, Italia</div>
-          </div>
-          <div class="contact-row">
-            <div class="contact-label">Come prenotare</div>
-            <div>
-              Inviaci una mail o un messaggio WhatsApp indicando date, numero di persone e preferenza tra suite o Bubble Room. Ti risponderemo personalmente con una proposta su misura.
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <footer>
-        <div class="footer-top">
-          <div class="footer-brand">Bubblebee · Luxury B&amp;B</div>
-          <div class="footer-links">
-            <span>Instagram</span>
-            <span>Facebook</span>
-          </div>
-        </div>
-        <div>© <span id="year"></span> Bubblebee. Tutti i diritti riservati.</div>
-      </footer>
-    </main>
-  </div>
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div style="font-weight:700">Bubblebee · Luxury B&amp;B</div>
+        <div style="color:var(--muted)">© <span id="year"></span></div>
+      </div>
+    </footer>
+  </main>
 
   <script>
+    // year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // NAV toggle
+    const hamburger = document.getElementById('hamburger');
+    const navPanel = document.getElementById('navPanel');
+    function toggleNav(){
+      const open = navPanel.classList.toggle('open');
+      navPanel.setAttribute('aria-hidden', !open);
+    }
+    hamburger.addEventListener('click', toggleNav);
+
+    // smooth scroll helper
+    function scrollToSection(id){
+      toggleNav(); // close nav on mobile
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    // HERO carousel logic (lightweight, accessible)
+    (function(){
+      const slides = Array.from(document.querySelectorAll('#heroCarousel .slide'));
+      const dots = Array.from(document.querySelectorAll('#heroDots .dot'));
+      let idx = 0;
+      let autoplay = true;
+      let timer = null;
+      function show(i){
+        slides.forEach((s,si)=> s.classList.toggle('active', si===i));
+        dots.forEach((d,di)=> d.classList.toggle('active', di===i));
+        idx = i;
+      }
+      function next(){ show((idx+1) % slides.length) }
+      function prev(){ show((idx-1+slides.length) % slides.length) }
+      function startAuto(){ if(timer) clearInterval(timer); timer = setInterval(next, 4500) }
+      function stopAuto(){ if(timer) clearInterval(timer); timer = null }
+      // expose controls
+      window.heroNext = function(){ stopAuto(); next(); if(autoplay) startAuto() }
+      window.heroPrev = function(){ stopAuto(); prev(); if(autoplay) startAuto() }
+      window.heroGo = function(i){ stopAuto(); show(i); if(autoplay) startAuto() }
+      // init
+      slides.forEach(s=> s.addEventListener('mouseenter', stopAuto));
+      slides.forEach(s=> s.addEventListener('mouseleave', startAuto));
+      startAuto();
+      // keyboard accessibility
+      document.addEventListener('keydown', (e)=>{
+        if(e.key === 'ArrowRight') heroNext();
+        if(e.key === 'ArrowLeft') heroPrev();
+      });
+    })();
+
+    // Logo fallback: if logo is too wide on very small screens, scale down
+    (function(){
+      const logo = document.getElementById('site-logo');
+      function adjustLogo(){
+        if(!logo) return;
+        const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+        if(vw < 360){
+          logo.style.maxHeight = '40px';
+          logo.style.maxWidth = '120px';
+        } else {
+          logo.style.maxHeight = '';
+          logo.style.maxWidth = '';
+        }
+      }
+      window.addEventListener('resize', adjustLogo);
+      adjustLogo();
+    })();
   </script>
 </body>
 </html>
